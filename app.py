@@ -2,8 +2,7 @@ import os
 import structlog
 import uvicorn
 from fastapi import FastAPI, status
-from fastapi.responses import JSONResponse
-from fastapi.encoders import jsonable_encoder
+from fastapi.responses import Response
 
 
 app = FastAPI()
@@ -11,9 +10,9 @@ app = FastAPI()
 
 @app.post("/")
 async def webhook():
-    return JSONResponse(
-        content=jsonable_encoder({"message": "hello world!"}),
-        status_code=status.HTTP_200_OK,
+    return Response(
+        content="",
+        status_code=status.HTTP_204_NO_CONTENT,
     )
 
 

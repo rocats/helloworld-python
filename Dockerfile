@@ -12,9 +12,10 @@
 #  See /License for more information.
 
 ARG PYTHON_VERSION
+ARG NGINX_UNIT_VERSION
 ARG APP_DIR="/app"
 
-FROM python:${PYTHON_VERSION}-slim-bullseye as builder
+FROM unit:${NGINX_UNIT_VERSION}-python${PYTHON_VERSION} as builder
 
 ARG APP_DIR
 
@@ -23,7 +24,7 @@ ADD requirements.txt ${APP_DIR}/requirements.txt
 WORKDIR ${APP_DIR}
 RUN pip install -r requirements.txt
 
-COPY app.py ./
+COPY main.py ./
+COPY config.json /docker-entrypoint.d/config.json
 
-ENTRYPOINT [ "/usr/local/bin/python" ]
-CMD [ "app.py" ]
+EXPOSE 80

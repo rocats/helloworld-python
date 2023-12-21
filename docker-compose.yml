@@ -8,7 +8,8 @@ services:
     build:
       context: .
       args:
-        PYTHON_VERSION: 3.12
+        NGINX_UNIT_VERSION: 1.31.1
+        PYTHON_VERSION: 3.11
     ports:
-      - 5000:5000
+      - 8080:80
     restart: unless-stopped

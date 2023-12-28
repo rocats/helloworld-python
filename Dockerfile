@@ -18,12 +18,14 @@ FROM python:${PYTHON_VERSION}-slim-bullseye as builder
 
 ARG APP_DIR
 
-ADD requirements.txt ${APP_DIR}/requirements.txt
-
 WORKDIR ${APP_DIR}
-RUN pip install -r requirements.txt
 
-COPY app.py ./
+ADD requirements.txt .
 
-ENTRYPOINT [ "/usr/local/bin/python" ]
+RUN python3 -m venv venv && \
+    venv/bin/pip install -r requirements.txt
+
+ADD app.py .
+
+ENTRYPOINT [ "./venv/bin/python" ]
 CMD [ "app.py" ]

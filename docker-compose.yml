@@ -7,8 +7,6 @@ services:
     container_name: helloworld 
     build:
       context: .
-      args:
-        PYTHON_VERSION: 3.12
     ports:
-      - 5000:5000
+      - 8080:8080
     restart: unless-stopped
